@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Build Your Own Coding Agent',
   description: '从 0 到 1 构建 Coding Agent CLI — 参考 Claude Code 架构，手写底层机制',
-  srcDir: 'chapters',
+  srcDir: './chapters',
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
