@@ -1,0 +1,699 @@
+/* ═══════════════════════════════════════════════════════════════
+   Build Your Own Coding Agent — Custom Theme
+   Aesthetic: Craftsman Terminal
+   Typefaces: Lora (display) · Nunito (body) · Fira Code (mono)
+   Palette:   #0d0d11 · #ede4cc · #c8a84b
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+/* ──────────────────────────────────────────
+   FONTS
+   ────────────────────────────────────────── */
+
+:root {
+  --vp-font-family-base: 'Nunito', system-ui, -apple-system, sans-serif;
+  --vp-font-family-mono: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+}
+
+/* ──────────────────────────────────────────
+   BRAND COLORS (both light & dark)
+   ────────────────────────────────────────── */
+
+:root {
+  --vp-c-brand-1: #c8a84b;
+  --vp-c-brand-2: #d9b95c;
+  --vp-c-brand-3: #e8ca6d;
+  --vp-c-brand-soft: rgba(200, 168, 75, 0.12);
+
+  /* Home hero name gradient */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(145deg, #ede4cc 25%, #c8a84b 75%);
+  --vp-home-hero-image-background-image: radial-gradient(
+    ellipse at center,
+    rgba(200, 168, 75, 0.18) 0%,
+    transparent 70%
+  );
+  --vp-home-hero-image-filter: blur(56px);
+}
+
+/* ──────────────────────────────────────────
+   DARK MODE PALETTE
+   ────────────────────────────────────────── */
+
+.dark {
+  /* Backgrounds — layered depth */
+  --vp-c-bg:        #0d0d11;
+  --vp-c-bg-soft:   #13131a;
+  --vp-c-bg-mute:   #1b1b24;
+  --vp-c-bg-alt:    #09090d;
+  --vp-c-bg-elv:    #212133;
+
+  /* Text — warm off-white */
+  --vp-c-text-1: #ede4cc;
+  --vp-c-text-2: #988f7c;
+  --vp-c-text-3: #615950;
+
+  /* Borders */
+  --vp-c-border:   #252535;
+  --vp-c-divider:  #1d1d2c;
+  --vp-c-gutter:   #0d0d11;
+
+  /* Sidebar */
+  --vp-sidebar-bg-color: #0d0d11;
+}
+
+/* ──────────────────────────────────────────
+   BASE
+   ────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+}
+
+/* Subtle top-of-page amber shimmer */
+.VPNav {
+  position: relative;
+}
+
+.VPNav::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(200, 168, 75, 0.35) 40%,
+    rgba(200, 168, 75, 0.35) 60%,
+    transparent 100%
+  );
+}
+
+/* ──────────────────────────────────────────
+   NAVIGATION BAR
+   ────────────────────────────────────────── */
+
+.dark .VPNavBar {
+  background: rgba(13, 13, 17, 0.88) !important;
+  backdrop-filter: blur(24px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
+  border-bottom: none !important;
+}
+
+.VPNavBarTitle .title {
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.015em;
+  background: linear-gradient(135deg, #ede4cc, #c8a84b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ──────────────────────────────────────────
+   SIDEBAR
+   ────────────────────────────────────────── */
+
+.dark .VPSidebar {
+  background-color: #0d0d11 !important;
+  border-right: 1px solid #1d1d2c !important;
+}
+
+/* Chapter group headings */
+.VPSidebarItem.level-0 > .item > .text {
+  font-family: 'Lora', serif !important;
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.09em !important;
+  text-transform: uppercase !important;
+  color: var(--vp-c-brand-1) !important;
+  padding-top: 0.25rem;
+}
+
+/* Section item text */
+.VPSidebarItem.level-1 > .item > .text {
+  font-size: 0.84rem !important;
+  font-weight: 400;
+  color: var(--vp-c-text-2) !important;
+  transition: color 0.15s;
+}
+
+.VPSidebarItem.level-1 > .item:hover > .text {
+  color: var(--vp-c-text-1) !important;
+}
+
+/* Active item */
+.VPSidebarItem.level-1.is-active > .item > .text {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600 !important;
+}
+
+/* Active left indicator bar */
+.VPSidebarItem.level-1 > .item {
+  position: relative;
+}
+
+.VPSidebarItem.level-1.is-active > .item::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 2px;
+  background: var(--vp-c-brand-1);
+  border-radius: 1px;
+}
+
+/* ──────────────────────────────────────────
+   HOME PAGE — HERO
+   ────────────────────────────────────────── */
+
+.VPHome {
+  padding-bottom: 80px;
+}
+
+.VPHero {
+  padding: 96px 24px 80px !important;
+}
+
+.VPHero .name {
+  font-family: 'Lora', serif !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.VPHero .text {
+  font-family: 'Lora', serif !important;
+  font-weight: 500 !important;
+  font-style: italic !important;
+}
+
+.dark .VPHero .text {
+  color: #988f7c !important;
+}
+
+.VPHero .tagline {
+  font-size: 1rem !important;
+  line-height: 1.8 !important;
+  max-width: 560px;
+}
+
+/* CTA — Brand button */
+.VPButton.medium.brand {
+  background: var(--vp-c-brand-1) !important;
+  border-color: var(--vp-c-brand-1) !important;
+  color: #0d0d11 !important;
+  font-weight: 700 !important;
+  font-size: 0.875rem !important;
+  letter-spacing: 0.04em !important;
+  border-radius: 6px !important;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease !important;
+}
+
+.VPButton.medium.brand:hover {
+  background: var(--vp-c-brand-2) !important;
+  border-color: var(--vp-c-brand-2) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 24px rgba(200, 168, 75, 0.28) !important;
+}
+
+/* CTA — Alt button */
+.VPButton.medium.alt {
+  background: transparent !important;
+  border-color: var(--vp-c-border) !important;
+  color: var(--vp-c-text-2) !important;
+  border-radius: 6px !important;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease !important;
+}
+
+.VPButton.medium.alt:hover {
+  border-color: var(--vp-c-brand-1) !important;
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* ──────────────────────────────────────────
+   HOME PAGE — FEATURE CARDS
+   ────────────────────────────────────────── */
+
+.VPFeatures {
+  border-top: 1px solid var(--vp-c-divider);
+  padding-top: 2rem;
+  margin-top: 1rem;
+}
+
+.VPFeatures .items {
+  gap: 16px !important;
+}
+
+.dark .VPFeature {
+  background: #13131a !important;
+  border: 1px solid #252535 !important;
+  border-radius: 12px !important;
+  padding: 28px !important;
+  transition:
+    border-color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.dark .VPFeature:hover {
+  border-color: var(--vp-c-brand-1) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(200, 168, 75, 0.1);
+}
+
+.VPFeature .icon {
+  font-size: 2rem !important;
+  margin-bottom: 1rem !important;
+  display: block;
+}
+
+.VPFeature .title {
+  font-family: 'Lora', serif !important;
+  font-size: 1.05rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem !important;
+  color: var(--vp-c-text-1) !important;
+}
+
+.VPFeature .details {
+  font-size: 0.875rem !important;
+  line-height: 1.7 !important;
+  color: var(--vp-c-text-2) !important;
+  margin-bottom: 1rem !important;
+}
+
+.VPFeature .link-text {
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  color: var(--vp-c-brand-1) !important;
+}
+
+.VPFeature .link-text-value::after {
+  content: ' →';
+}
+
+/* ──────────────────────────────────────────
+   CONTENT — HEADINGS
+   ────────────────────────────────────────── */
+
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4 {
+  font-family: 'Lora', serif;
+  letter-spacing: -0.015em;
+}
+
+.vp-doc h1 {
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+/* h2: amber left-border accent */
+.vp-doc h2 {
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin-top: 3rem;
+  padding-top: 0;
+  padding-left: 14px;
+  border-top: none !important;
+  border-left: 3px solid var(--vp-c-brand-1);
+  border-bottom: none;
+  line-height: 1.35;
+}
+
+.vp-doc h3 {
+  font-size: 1.12rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  color: var(--vp-c-text-1);
+}
+
+/* Section separator before h2 groups */
+.vp-doc h2 + p,
+.vp-doc h2 + ul,
+.vp-doc h2 + ol,
+.vp-doc h2 + blockquote,
+.vp-doc h2 + div {
+  margin-top: 1rem;
+}
+
+/* ──────────────────────────────────────────
+   CONTENT — BODY TEXT
+   ────────────────────────────────────────── */
+
+.vp-doc p {
+  line-height: 1.82;
+  font-size: 0.97rem;
+}
+
+.vp-doc li {
+  line-height: 1.75;
+  font-size: 0.96rem;
+}
+
+/* ──────────────────────────────────────────
+   CONTENT — LINKS
+   ────────────────────────────────────────── */
+
+.vp-doc a {
+  color: var(--vp-c-brand-1) !important;
+  text-decoration: underline;
+  text-decoration-color: rgba(200, 168, 75, 0.35);
+  text-underline-offset: 3px;
+  font-weight: 500;
+  transition:
+    color 0.15s ease,
+    text-decoration-color 0.15s ease;
+}
+
+.vp-doc a:hover {
+  color: var(--vp-c-brand-2) !important;
+  text-decoration-color: var(--vp-c-brand-2);
+}
+
+/* ──────────────────────────────────────────
+   CONTENT — INLINE CODE
+   ────────────────────────────────────────── */
+
+.vp-doc :not(pre) > code {
+  background: rgba(200, 168, 75, 0.09) !important;
+  color: #d4b060 !important;
+  border: 1px solid rgba(200, 168, 75, 0.18) !important;
+  border-radius: 4px;
+  padding: 0.12em 0.42em;
+  font-size: 0.875em;
+  font-weight: 500;
+  font-variant-ligatures: none;
+}
+
+/* ──────────────────────────────────────────
+   CODE BLOCKS
+   ────────────────────────────────────────── */
+
+.vp-doc div[class*='language-'] {
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+
+.dark .vp-doc div[class*='language-'] {
+  background: #09090e !important;
+  border: 1px solid #252535 !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.vp-doc div[class*='language-'] code {
+  font-family: 'Fira Code', monospace !important;
+  font-size: 0.855rem !important;
+  line-height: 1.76 !important;
+  font-variant-ligatures: common-ligatures;
+}
+
+/* Language label */
+.vp-doc div[class*='language-']::before {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  color: #504840;
+  opacity: 1;
+}
+
+/* Copy button */
+.vp-doc div[class*='language-'] button.copy {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.vp-doc div[class*='language-']:hover button.copy {
+  opacity: 1;
+}
+
+/* ──────────────────────────────────────────
+   CUSTOM CONTAINERS (tip / warning / danger)
+   ────────────────────────────────────────── */
+
+.vp-doc .custom-block {
+  border-radius: 0 8px 8px 0 !important;
+  border: none !important;
+  border-left: 3px solid !important;
+}
+
+.vp-doc .custom-block.tip {
+  background: rgba(200, 168, 75, 0.06) !important;
+  border-left-color: var(--vp-c-brand-1) !important;
+}
+
+.vp-doc .custom-block.tip .custom-block-title {
+  color: var(--vp-c-brand-1) !important;
+  font-family: 'Lora', serif;
+  font-size: 0.95rem;
+}
+
+.vp-doc .custom-block.warning {
+  background: rgba(220, 140, 20, 0.05) !important;
+  border-left-color: #dc8c14 !important;
+}
+
+.vp-doc .custom-block.warning .custom-block-title {
+  color: #dc8c14 !important;
+  font-family: 'Lora', serif;
+}
+
+.vp-doc .custom-block.danger {
+  background: rgba(200, 50, 50, 0.05) !important;
+  border-left-color: #c83232 !important;
+}
+
+.vp-doc .custom-block p {
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+/* ──────────────────────────────────────────
+   TABLES
+   ────────────────────────────────────────── */
+
+.vp-doc table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dark .vp-doc table {
+  border: 1px solid #252535;
+}
+
+.vp-doc th {
+  background: var(--vp-c-bg-mute) !important;
+  color: var(--vp-c-text-2) !important;
+  font-weight: 700;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--vp-c-border) !important;
+}
+
+.vp-doc td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--vp-c-divider) !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.vp-doc tr:last-child td {
+  border-bottom: none !important;
+}
+
+.dark .vp-doc tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+/* ──────────────────────────────────────────
+   OUTLINE / TABLE OF CONTENTS
+   ────────────────────────────────────────── */
+
+.VPDocAsideOutline .title {
+  font-size: 0.72rem !important;
+  letter-spacing: 0.09em !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  color: var(--vp-c-text-3) !important;
+}
+
+.VPDocAsideOutline a {
+  font-size: 0.82rem;
+  transition: color 0.15s;
+}
+
+.VPDocAsideOutline a:hover {
+  color: var(--vp-c-text-1) !important;
+}
+
+.VPDocAsideOutline a.active {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600 !important;
+}
+
+/* ──────────────────────────────────────────
+   PREV / NEXT PAGE FOOTER
+   ────────────────────────────────────────── */
+
+.VPDocFooter {
+  border-top: 1px solid var(--vp-c-divider) !important;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+}
+
+.dark .VPDocFooter .pager-link {
+  background: #13131a !important;
+  border: 1px solid #252535 !important;
+  border-radius: 10px !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dark .VPDocFooter .pager-link:hover {
+  border-color: var(--vp-c-brand-1) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.VPDocFooter .pager-link .title {
+  font-family: 'Lora', serif !important;
+  font-weight: 600 !important;
+  color: var(--vp-c-brand-1) !important;
+  font-size: 1rem !important;
+}
+
+.VPDocFooter .pager-link .desc {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--vp-c-text-3);
+}
+
+/* ──────────────────────────────────────────
+   FOOTER
+   ────────────────────────────────────────── */
+
+.VPFooter {
+  background: transparent !important;
+  border-top: 1px solid var(--vp-c-divider) !important;
+}
+
+.VPFooter .message {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+  color: var(--vp-c-text-3);
+  letter-spacing: 0.03em;
+}
+
+/* ──────────────────────────────────────────
+   SCROLLBAR
+   ────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2c2c3e;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a52;
+}
+
+/* ──────────────────────────────────────────
+   SELECTION
+   ────────────────────────────────────────── */
+
+::selection {
+  background: rgba(200, 168, 75, 0.22);
+  color: var(--vp-c-text-1);
+}
+
+/* ──────────────────────────────────────────
+   HORIZONTAL RULE
+   ────────────────────────────────────────── */
+
+.vp-doc hr {
+  border: none;
+  border-top: 1px solid var(--vp-c-divider);
+  margin: 2.5rem 0;
+  position: relative;
+}
+
+.vp-doc hr::before {
+  content: '◆';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--vp-c-bg);
+  color: var(--vp-c-brand-1);
+  font-size: 0.6rem;
+  padding: 0 0.8rem;
+  opacity: 0.7;
+}
+
+/* ──────────────────────────────────────────
+   BLOCKQUOTE
+   ────────────────────────────────────────── */
+
+.vp-doc blockquote {
+  border-left: 3px solid var(--vp-c-brand-1) !important;
+  background: rgba(200, 168, 75, 0.04) !important;
+  border-radius: 0 6px 6px 0;
+  padding: 0.8rem 1.2rem !important;
+  margin: 1.5rem 0 !important;
+}
+
+.vp-doc blockquote p {
+  color: var(--vp-c-text-2) !important;
+  font-style: italic;
+  font-family: 'Lora', serif;
+  font-size: 0.95rem;
+}
+
+/* ──────────────────────────────────────────
+   SEARCH
+   ────────────────────────────────────────── */
+
+.dark .DocSearch-Modal {
+  background: #13131a !important;
+}
+
+.dark .DocSearch-SearchBar {
+  border-bottom: 1px solid #252535 !important;
+}
