@@ -1,0 +1,12 @@
+{
+  "name": "steven-docs",
+  "private": true,
+  "scripts": {
+    "dev": "vitepress dev chapters",
+    "build": "vitepress build chapters",
+    "preview": "vitepress preview chapters"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.0"
+  }
+}
