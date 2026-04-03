@@ -4,19 +4,6 @@ export default defineConfig({
   title: 'Build Your Own Coding Agent',
   description: '从 0 到 1 构建 Coding Agent CLI — 参考 Claude Code 架构，手写底层机制',
   srcDir: './chapters',
-  appearance: 'force-dark',
-  head: [
-    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
-    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
-    [
-      'link',
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap',
-      },
-    ],
-    ['meta', { name: 'theme-color', content: '#0d0d11' }],
-  ],
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
