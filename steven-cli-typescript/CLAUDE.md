@@ -1,3 +1,29 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project: steven-cli-typescript
+
+A TypeScript CLI coding agent built on the Anthropic SDK. An interactive REPL that runs an agentic loop — Claude reads/writes files, executes shell commands, and tracks tasks autonomously.
+
+**Start the CLI**: `bun run index.ts`
+
+**Env vars** (Bun auto-loads `.env`):
+- `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN` — required to authenticate
+- `ANTHROPIC_BASE_URL` — optional, custom API endpoint
+- `MODEL_ID` — optional, defaults to `claude-sonnet-4-6`
+
+**Src layout**:
+- `index.ts` — readline REPL entry point
+- `src/agent.ts` — agentic loop (API calls, tool dispatch, todo reminder)
+- `src/api.ts` + `src/config.ts` — SDK client and env config
+- `src/tools/` — bash, files (read/write/edit), todo (task tracking)
+
+**Tool safety constraints**: `bash` blocks `rm -rf /`, `sudo`, `shutdown`, `reboot`. All file paths are sandboxed to `WORKDIR` via `safePath()`.
+
+**Commits**: Use Conventional Commits — `feat:`, `fix:`, `refactor:`, `docs:`, `chore:`.
+
+---
 
 Default to using Bun instead of Node.js.
 
