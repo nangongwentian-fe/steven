@@ -29,6 +29,9 @@ features:
   - title: 工具系统
     details: 统一的 (name, input) → string 接口，中央分发器模式，4 类工具覆盖文件、命令、任务。
     link: /modules/tools/
+  - title: Agent SDK 封装教程
+    details: 对比 Vercel AI SDK / Claude Agent SDK / pi-mono，从零构建你自己的 Agent SDK。
+    link: /agent-sdk/
   - title: 安全边界
     details: safePath 路径沙箱 + DANGEROUS 命令黑名单 + 超时截断，防御性工具设计。
     link: /modules/tools/bash

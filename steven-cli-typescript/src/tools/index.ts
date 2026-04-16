@@ -1,97 +1,71 @@
-import Anthropic from "@anthropic-ai/sdk";
+import { defineTool } from "steven-agent-sdk";
+import { z } from "zod";
 import { runBash } from "./bash";
-import { runRead, runWrite, runEdit } from "./files";
-import { runTodo, type TodoItem } from "./todo";
+import { runEdit, runRead, runWrite } from "./files";
+import { runTodo } from "./todo";
 
-export const TOOLS: Anthropic.Tool[] = [
-  {
-    name: "bash",
-    description: "Run a shell command.",
-    input_schema: {
-      type: "object",
-      properties: {
-        command: { type: "string" }
-      },
-      required: ["command"]
-    }
-  },
-  {
-    name: "read_file",
-    description: "Read file contents.",
-    input_schema: {
-      type: "object",
-      properties: {
-        path: { type: "string" },
-        limit: { type: "integer" }
-      },
-      required: ["path"]
-    }
-  },
-  {
-    name: "write_file",
-    description: "Write content to file.",
-    input_schema: {
-      type: "object",
-      properties: {
-        path: { type: "string" },
-        content: { type: "string" }
-      },
-      required: ["path", "content"]
-    }
-  },
-  {
-    name: "edit_file",
-    description: "Replace exact text in file.",
-    input_schema: {
-      type: "object",
-      properties: {
-        path: { type: "string" },
-        old_text: { type: "string" },
-        new_text: { type: "string" }
-      },
-      required: ["path", "old_text", "new_text"]
-    }
-  },
-  {
-    name: "todo",
-    description: "Update task list. Track progress on multi-step tasks.",
-    input_schema: {
-      type: "object",
-      properties: {
-        items: {
-          type: "array",
-          items: {
-            type: "object",
-            properties: {
-              id: { type: "string" },
-              text: { type: "string" },
-              status: { type: "string", enum: ["pending", "in_progress", "completed"] }
-            },
-            required: ["id", "text", "status"]
-          }
-        }
-      },
-      required: ["items"]
-    }
-  }
+const todoItemSchema = z.object({
+	id: z.string(),
+	text: z.string(),
+	status: z.enum(["pending", "in_progress", "completed"]),
+});
+
+export const bashTool = defineTool({
+	name: "bash",
+	description: "Run a shell command.",
+	schema: z.object({
+		command: z.string(),
+	}),
+	handler: ({ command }) => {
+		console.log(`\x1b[33m$ ${command}\x1b[0m`);
+		return runBash(command);
+	},
+});
+
+export const readFileTool = defineTool({
+	name: "read_file",
+	description: "Read file contents.",
+	schema: z.object({
+		path: z.string(),
+		limit: z.number().int().optional(),
+	}),
+	handler: ({ path, limit }) => runRead(path, limit),
+});
+
+export const writeFileTool = defineTool({
+	name: "write_file",
+	description: "Write content to file.",
+	schema: z.object({
+		path: z.string(),
+		content: z.string(),
+	}),
+	handler: ({ path, content }) => runWrite(path, content),
+});
+
+export const editFileTool = defineTool({
+	name: "edit_file",
+	description: "Replace exact text in file.",
+	schema: z.object({
+		path: z.string(),
+		old_text: z.string(),
+		new_text: z.string(),
+	}),
+	handler: ({ path, old_text, new_text }) => runEdit(path, old_text, new_text),
+});
+
+export const todoTool = defineTool({
+	name: "todo",
+	description: "Update task list. Track progress on multi-step tasks.",
+	schema: z.object({
+		items: z.array(todoItemSchema),
+	}),
+	handler: ({ items }) => runTodo(items),
+});
+
+export const TOOLS = [
+	bashTool,
+	readFileTool,
+	writeFileTool,
+	editFileTool,
+	todoTool,
 ];
-
-export function runTool(name: string, input: Record<string, unknown>): string {
-  switch (name) {
-    case "bash": {
-      const cmd = input.command as string;
-      console.log(`\x1b[33m$ ${cmd}\x1b[0m`);
-      return runBash(cmd);
-    }
-    case "read_file":
-      return runRead(input.path as string, input.limit as number | undefined);
-    case "write_file":
-      return runWrite(input.path as string, input.content as string);
-    case "edit_file":
-      return runEdit(input.path as string, input.old_text as string, input.new_text as string);
-    case "todo":
-      return runTodo(input.items as TodoItem[]);
-    default:
-      return `Unknown tool: ${name}`;
-  }
-}

@@ -1,14 +1,15 @@
 {
-  "name": "steven",
-  "private": true,
-  "workspaces": [
-    "docs-site",
-    "steven-cli-typescript",
-    "steven-cli-langchain"
-  ],
-  "scripts": {
-    "docs:dev": "bun --cwd docs-site run dev",
-    "docs:build": "bun --cwd docs-site run build",
-    "docs:preview": "bun --cwd docs-site run preview"
-  }
+	"name": "steven",
+	"private": true,
+	"workspaces": [
+		"docs-site",
+		"steven-agent-sdk",
+		"steven-cli-typescript",
+		"steven-cli-langchain"
+	],
+	"scripts": {
+		"docs:dev": "bun run --cwd docs-site dev",
+		"docs:build": "bun run --cwd docs-site build",
+		"docs:preview": "bun run --cwd docs-site preview"
+	}
 }

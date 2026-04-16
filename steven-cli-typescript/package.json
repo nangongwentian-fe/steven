@@ -1,17 +1,18 @@
 {
-  "name": "learn-claude-code",
-  "module": "index.ts",
-  "type": "module",
-  "private": true,
-  "devDependencies": {
-    "@biomejs/biome": "^2.4.10",
-    "@types/bun": "latest",
-    "@types/node": "^25.5.2"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.82.0"
-  }
+	"name": "learn-claude-code",
+	"module": "index.ts",
+	"type": "module",
+	"private": true,
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.10",
+		"@types/bun": "latest",
+		"@types/node": "^25.5.2"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"steven-agent-sdk": "workspace:*",
+		"zod": "^3.25.0"
+	}
 }
