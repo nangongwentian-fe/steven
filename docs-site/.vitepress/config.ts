@@ -4,6 +4,25 @@ export default defineConfig({
 	title: "Steven Agent 设计文档",
 	description: "从 0 到 1 构建 Coding Agent CLI，拆解每个模块的设计思路与实现细节",
 	srcDir: "./chapters",
+	markdown: {
+		config(md) {
+			const fence =
+				md.renderer.rules.fence?.bind(md.renderer.rules) ??
+				((tokens, idx, options, env, self) => self.renderToken(tokens, idx, options));
+
+			md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+				const token = tokens[idx];
+				const lang = token.info.trim().split(/\s+/u)[0];
+
+				if (lang === "mermaid") {
+					const code = Buffer.from(token.content, "utf8").toString("base64");
+					return `<MermaidBlock code="${code}" />`;
+				}
+
+				return fence(tokens, idx, options, env, self);
+			};
+		},
+	},
 	themeConfig: {
 		nav: [
 			{ text: "首页", link: "/" },
